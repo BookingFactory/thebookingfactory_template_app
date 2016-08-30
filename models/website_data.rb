@@ -1,4 +1,5 @@
 class WebsiteData < Sequel::Model
+  many_to_one :hotel
   one_to_many :website_blog_records
   one_to_many :website_questions
   one_to_many :website_features
@@ -16,8 +17,6 @@ class WebsiteData < Sequel::Model
   one_to_many :website_translations
   one_to_many :website_testimonials
 
-
-  liquid_methods :id
 end
 
 WebsiteData.set_dataset :website_data

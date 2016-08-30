@@ -1,0 +1,114 @@
+<h4> Questions </h4>
+{% for question in website_data.questions %}
+  {{question.question}}
+  <br />
+  {{question.answer}}
+{% endfor %}
+
+<hr>
+
+<h4> Blog Records </h4>
+{% for blog_record in website_data.blog_records %}
+  {{blog_record.title}}
+  {{blog_record.text}}
+{% endfor %}
+
+<hr>
+
+<h4> Features </h4>
+{% for feature in website_data.features %}
+  {{feature.title}}
+  <br />
+  {{feature.description}}
+  <br />
+{% endfor %}
+
+<hr>
+<h4> Footers </h4>
+
+{% for footer in website_data.footers %}
+  {{footer.title}}
+  <br />
+  {{footer.text}}
+  <br />
+{% endfor %}
+
+<hr>
+<h4> Rooms </h4>
+
+{% for room in website_data.rooms %}
+  {{room.room_type.id}}
+{% endfor %}
+
+<hr>
+
+<h4> Custom rooms </h4>
+{% for curom_room in website_data.custom_rooms %}
+  {{custom_rooms.name}}
+{% endfor %}
+
+<hr>
+
+<h4> Pages </h4>
+
+{% for page in website_data.pages %}
+  {{page.title}}
+{% endfor %}
+
+<hr>
+<h4> Links </h4>
+
+{% for link in website_data.links %}
+  {{link.title}}
+  <br />
+{% endfor %}
+
+<hr>
+
+<h4> Testimonials </h4>
+
+{% for testimonial in website_data.testimonials %}
+  {{testimonial.title}}
+  {{testimonial.body}}
+  {{testimonial.name}}
+{% endfor %}
+
+<hr>
+
+<h4> Invisiable photos </h4>
+
+{% for invisible_photo in website_data.invisible_photos %}
+  {{invisible_photo.methods}}
+{% endfor %}
+
+<hr>
+
+<h4> Gallery photos </h4>
+
+{% for gallery_photo in website_data.gallery_photos %}
+  <img src="{{gallery_photo.photo_original_url}}" />
+  <img src="{{gallery_photo.photo_public_url}}" />
+  <img src="{{gallery_photo.photo_big_url}}" />
+  <img src="{{gallery_photo.photo_medium_url}}" />
+  <img src="{{gallery_photo.photo_thumb_url}}" />
+  <img src="{{gallery_photo.photo_public_small_url}}" />
+  <img src="{{gallery_photo.photo_public_big_url}}" />
+  <img src="{{gallery_photo.photo_small_url}}" />
+  <img src="{{gallery_photo.photo_booking_page_url}}" />
+{% endfor %}
+
+<hr>
+
+<h4> Photos  </h4>
+
+{% for photo in website_data.photos %}
+<img src="{{photo.photo_original_url}}" />
+<img src="{{photo.photo_public_url}}" />
+<img src="{{photo.photo_big_url}}" />
+<img src="{{photo.photo_medium_url}}" />
+<img src="{{photo.photo_thumb_url}}" />
+<img src="{{photo.photo_public_small_url}}" />
+<img src="{{photo.photo_public_big_url}}" />
+<img src="{{photo.photo_small_url}}" />
+<img src="{{photo.photo_booking_page_url}}" />
+{% endfor %}
