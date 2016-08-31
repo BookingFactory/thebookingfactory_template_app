@@ -86,15 +86,7 @@
 <h4> Gallery photos </h4>
 
 {% for gallery_photo in website_data.gallery_photos %}
-  <img src="{{gallery_photo.photo_original_url}}" />
-  <img src="{{gallery_photo.photo_public_url}}" />
-  <img src="{{gallery_photo.photo_big_url}}" />
-  <img src="{{gallery_photo.photo_medium_url}}" />
-  <img src="{{gallery_photo.photo_thumb_url}}" />
-  <img src="{{gallery_photo.photo_public_small_url}}" />
-  <img src="{{gallery_photo.photo_public_big_url}}" />
-  <img src="{{gallery_photo.photo_small_url}}" />
-  <img src="{{gallery_photo.photo_booking_page_url}}" />
+  <img src="{{gallery_photo.image | attachment_url: 'thumb'}}" />
 {% endfor %}
 
 <hr>
@@ -102,13 +94,4 @@
 <h4> Photos  </h4>
 
 {% for photo in website_data.photos %}
-<img src="{{photo.photo_original_url}}" />
-<img src="{{photo.photo_public_url}}" />
-<img src="{{photo.photo_big_url}}" />
-<img src="{{photo.photo_medium_url}}" />
-<img src="{{photo.photo_thumb_url}}" />
-<img src="{{photo.photo_public_small_url}}" />
-<img src="{{photo.photo_public_big_url}}" />
-<img src="{{photo.photo_small_url}}" />
-<img src="{{photo.photo_booking_page_url}}" />
 {% endfor %}

@@ -3,7 +3,6 @@ require "sinatra/base"
 require "sequel"
 require "liquid"
 
-
 DB = Sequel.postgres('buuqit',
   :user => 'buuqit_user',
   :password => 'buuqit_password',
@@ -11,17 +10,15 @@ DB = Sequel.postgres('buuqit',
   :port => 5432
 )
 
-#DB = Sequel.connect('postgres://user:password@localhost/my_db')
-
-Dir.glob("./helpers/*.rb") do |helper|
-  require "#{helper}"
+Dir.glob("./liquid_filters/*.rb") do |filter|
+  require "#{filter}"
 end
 
 Dir.glob("./models/*.rb") do |model|
   require "#{model}"
 end
 
-Dir.glob("./models/liquid_drops/*.rb") do |drop|
+Dir.glob("./liquid_drops/*.rb") do |drop|
   require "#{drop}"
 end
 
