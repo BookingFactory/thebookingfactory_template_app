@@ -17,6 +17,17 @@ class WebsiteData < Sequel::Model
   one_to_many :website_translations
   one_to_many :website_testimonials
 
+  def header_image
+    {
+      :id => self.id,
+      :class_name => self.class.table_name,
+      :file_field => 'header_images',
+      :file_name => self.header_image_file_name
+    }
+  end
+
+  liquid_methods :header_image
+
 end
 
 WebsiteData.set_dataset :website_data

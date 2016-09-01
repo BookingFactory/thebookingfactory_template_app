@@ -1,3 +1,8 @@
+<h4> Header image </h4>
+
+<img src="{{website_data.header_image | attachment_url: 'original' }}" />
+
+
 <h4> Questions </h4>
 {% for question in website_data.questions %}
   {{question.question}}
@@ -37,7 +42,7 @@
 <h4> Rooms </h4>
 
 {% for room in website_data.rooms %}
-  {{room.room_type.id}}
+  {{room.room_types}}
 {% endfor %}
 
 <hr>
@@ -94,4 +99,5 @@
 <h4> Photos  </h4>
 
 {% for photo in website_data.photos %}
+  <img src="{{photo.image | attachment_url: 'thumb'}}" />
 {% endfor %}

@@ -10,6 +10,31 @@ class WebsiteDataDrop < Liquid::Drop
     @website.website_questions
   end
 
+  def header_image
+    # This method return header image
+    @website.header_image
+  end
+
+  def header_text_1
+    @website.header_text_1
+  end
+
+  def header_text_2
+    @website.header_text_2
+  end
+
+  def booking_link
+    @website.booking_link
+  end
+
+  def booking_button_text
+    @website.booking_button_text
+  end
+
+  def booking_button_color
+    @website.booking_button_color
+  end
+
   def blog_records
     # This methods return website blog records
     @website.website_blog_records
