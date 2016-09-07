@@ -1,2 +1,5 @@
 require "./app"
-run WebsiteApplication
+
+run Rack::URLMap.new(
+  "/" => Website.new
+)

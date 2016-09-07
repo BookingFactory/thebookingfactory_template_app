@@ -14,8 +14,10 @@
 
 <h4> Blog Records </h4>
 {% for blog_record in website_data.blog_records %}
+  1
   {{blog_record.title}}
   {{blog_record.text}}
+  {{blog_record.all_text}}
 {% endfor %}
 
 <hr>
@@ -42,14 +44,16 @@
 <h4> Rooms </h4>
 
 {% for room in website_data.rooms %}
-  {{room.room_types}}
+  {{room.name}}
+  {{room.description}}
 {% endfor %}
 
 <hr>
 
 <h4> Custom rooms </h4>
 {% for curom_room in website_data.custom_rooms %}
-  {{custom_rooms.name}}
+  {{custom_room.title}}
+  {{custom_room.description}}
 {% endfor %}
 
 <hr>

@@ -1,8 +1,9 @@
 class WebsiteDataDrop < Liquid::Drop
 
-  def initialize()
+  def initialize(data)
     # Here will be init website
-    @website = WebsiteData.find(:id => 2)
+    @website = data
+    p @webiste
   end
 
   def questions

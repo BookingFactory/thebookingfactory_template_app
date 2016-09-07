@@ -17,11 +17,13 @@ class WebsiteData < Sequel::Model
   one_to_many :website_translations
   one_to_many :website_testimonials
 
+  FIEL_FIELD = 'header_images'
+
   def header_image
     {
       :id => self.id,
       :class_name => self.class.table_name,
-      :file_field => 'header_images',
+      :file_field => FIEL_FIELD,
       :file_name => self.header_image_file_name
     }
   end

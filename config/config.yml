@@ -1,1 +1,6 @@
-s3_url: 'https://buuqit-test.s3.amazonaws.com'
+development:
+  s3_url: 'https://buuqit-test.s3.amazonaws.com'
+  domains: 'lvh.me,localhost,dev.thebookingfactory.com,app.thebookingfactory.com,thebookingfactory.com,192.168.1.151'
+production:
+  s3_url: 'https://buuqit-test.s3.amazonaws.com'
+  domains: 'lvh.me,localhost,dev.thebookingfactory.com,app.thebookingfactory.com,thebookingfactory.com,192.168.1.151'

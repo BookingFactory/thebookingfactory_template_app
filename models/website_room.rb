@@ -6,7 +6,7 @@ class WebsiteRoom < Sequel::Model
     puts self.room_type
   end
 
-  liquid_methods :room_type
+  liquid_methods :name, :description
 end
 
 WebsiteRoom.set_dataset :website_rooms
