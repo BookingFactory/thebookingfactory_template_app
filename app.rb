@@ -26,79 +26,199 @@ end
 
 class Website < Sinatra::Base
   register Sinatra::ConfigFile
+  register Sinatra::Namespace
 
   config_file "./config/config.yml"
 
-  before "/:slug" do
-    load_hotel_and_data
-  end
+  namespace '/' do
 
-  ["/terms_and_conditions", "/:lang/terms_and_conditions", "/:slug/terms_and_conditions", "/:slug/:lang/terms_and_conditions"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :terms_and_conditions, :locals => { :website_data => @drop }
+    ["", ":lang"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :index, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["terms-and-conditions", ":lang/terms-and-conditions"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :terms_and_conditions, :locals => { :website_data => @drop}
+      end
+    end
+
+    ["privacy-policy", ":lang/privacy_policy"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :privacy_policy, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["about", ":lang/about"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :about_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["faq", ":lang/faq"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :faq_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["contacts", ":lang/contacts"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :contact_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["blog", ":lang/blog", "/:slug/blog"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        liquid :blog_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["blog_next", ":lang/blog_next"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :blog_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["blog/:page", ":lang/blog/:page"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :blog_page, :locals => { :website_data => @drop}
+      end
+    end
+
+    ["gallery", ":lang/gallery"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :gallery_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["membership", ":lang/membership"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :membership_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["book", ":lang/book"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :book_page, :locals => { :website_data => @drop }
+      end
     end
   end
 
-  ["/privacy-policy", "/:lang/privacy_policy", "/:slug/privacy_policy", "/:slug/:lang/privacy_policy"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :privacy_policy, :locals => { :website_data => @drop }
+  namespace '/:slug' do
+    ["", "/:lang"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :index, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/about", "/:lang/about", "/:slug/about", "/:slug/:lang/about"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :about_page, :locals => { :website_data => @drop }
+    ["/terms-and-conditions", "/:lang/terms-and-conditions"].each do |route|
+      get route do
+        pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
+        liquid :terms_and_conditions, :locals => { :website_data => @drop}
+      end
     end
-  end
 
-  ["/faq", "/:lang/faq", "/:slug/faq", "/:slug/:lang/faq"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :faq_page, :locals => { :website_data => @drop }
+    ["/privacy-policy", "/:lang/privacy_policy"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :privacy_policy, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/contacts", "/:lang/contacts", "/:slug/contacts", "/:slug/:en/contacts"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :contact_page, :locals => { :website_data => @drop }
+    ["/about", "/:lang/about"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :about_page, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/blog", "/:lang/blog", "/:slug/blog", "/:slug/:lang/blog"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :blog_page, :locals => { :website_data => @drop }
+    ["/faq", "/:lang/faq"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :faq_page, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/gallery", "/:lang/gallery", "/:slug/gallery", "/:slug/:en/gallery"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :gallery_page, :locals => { :website_data => @drop }
+    ["/contacts", "/:lang/contacts"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :contact_page, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/membership", "/:lang/membership", "/:slug/membership", "/:slug/:lang/membership"].each do |route|
-    get route do
-      liquid :membership_page, :locals => { :website_data => @drop }
+    ["/blog", "/:lang/blog"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :blog_page, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/book", "/:lang/book", "/:slug/book", "/:slug/:lang/book"].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :book_page, :locals => { :website_data => @drop }
+    ["/blog_next", "/:lang/blog_next"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :blog_page, :locals => { :website_data => @drop }
+      end
     end
-  end
 
-  ["/", "/:lang", "/:slug", '/:slug/:lang'].each do |route|
-    get route do
-      pass if params[:lang] && params[:lang].length > 2
-      liquid :index, :locals => { :website_data => @drop }
+    ["/blog/:page", "/:lang/blog/:page"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :blog_page, :locals => { :website_data => @drop}
+      end
+    end
+
+    ["/gallery", "/:lang/gallery"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :gallery_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["/membership", "/:lang/membership"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :membership_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["/book", "/:lang/book"].each do |route|
+      get route do
+        load_hotel_and_data
+        liquid :book_page, :locals => { :website_data => @drop }
+      end
+    end
+
+    ["/:page", "/:lang/:page"].each do |route|
+      get route do
+        load_hotel_and_data
+        "Render custom page"
+      end
     end
   end
 
