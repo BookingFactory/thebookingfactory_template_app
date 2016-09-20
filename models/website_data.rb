@@ -28,7 +28,24 @@ class WebsiteData < Sequel::Model
     }
   end
 
-  liquid_methods :header_image
+  def features_background_image
+    {
+      :id => self.id,
+      :class_name => self.class.table_name,
+      :file_field => 'features_background_images',
+      :file_name => self.features_background_image_file_name
+    }
+  end
+
+  def top_links
+    self.website_links_dataset.where(:zone => "top").sort_by(&:position)
+  end
+
+  def footer_links
+    self.website_links_dataset.where(:zone => "footer").sort_by(&:position)
+  end
+
+  liquid_methods :header_image, :features_background_image
 
 end
 

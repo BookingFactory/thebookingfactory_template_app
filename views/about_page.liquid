@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-7">
+      {{website_data.about_text}}
+    </div>
+    <div class="col-sm-5">
+      {% for photo in website_data.about_photos %}
+        <img  src="{{ photo.image | attachment_url: 'public_big' }}" />
+      {% endfor %}
+    </div>
+  </div>
+</div>

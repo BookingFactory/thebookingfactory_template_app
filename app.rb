@@ -30,6 +30,10 @@ class Website < Sinatra::Base
 
   config_file "./config/config.yml"
 
+  configure do
+
+  end
+
   namespace '/' do
 
     ["", ":lang"].each do |route|
@@ -80,9 +84,10 @@ class Website < Sinatra::Base
       end
     end
 
-    ["blog", ":lang/blog", "/:slug/blog"].each do |route|
+    ["blog", ":lang/blog"].each do |route|
       get route do
         pass if params[:lang] && params[:lang].length > 2
+        load_hotel_and_data
         liquid :blog_page, :locals => { :website_data => @drop }
       end
     end

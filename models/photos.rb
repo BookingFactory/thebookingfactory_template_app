@@ -4,6 +4,7 @@ class Photo < Sequel::Model
   FILE_FIELD = 'photos'
 
   def image
+    puts '111'
     {
       :id => self.id,
       :class_name => self.class.table_name,

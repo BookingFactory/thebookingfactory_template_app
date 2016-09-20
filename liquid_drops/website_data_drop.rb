@@ -3,7 +3,10 @@ class WebsiteDataDrop < Liquid::Drop
   def initialize(data)
     # Here will be init website
     @website = data
-    p @webiste
+  end
+
+  def hotel_name
+    @website.hotel.name
   end
 
   def questions
@@ -11,9 +14,57 @@ class WebsiteDataDrop < Liquid::Drop
     @website.website_questions
   end
 
+  def text_area
+    @website.text_area
+  end
+
+  def contact_area_title
+    @website.contact_area_title
+  end
+
+  def contact_description_text
+    @website.contact_description_text
+  end
+
+  def phone_number
+    @website.phone_number
+  end
+
+  def email_address
+    @website.email_address
+  end
+
+  def tripadvisor_listing_link
+    @website.tripadvisor_listing_link
+  end
+
   def header_image
     # This method return header image
     @website.header_image
+  end
+
+  def tripadvisor_code
+    @website.tripadvisor_code
+  end
+
+  def features_title
+    @website.features_title
+  end
+
+  def faq_title
+    @website.faq_title
+  end
+
+  def terms_and_conditions
+    @website.terms_and_conditions
+  end
+
+  def privacy_policy
+    @website.privacy_policy
+  end
+
+  def features_background_image
+    @website.features_background_image
   end
 
   def header_text_1
@@ -71,8 +122,15 @@ class WebsiteDataDrop < Liquid::Drop
     @website.website_about_photos
   end
 
-  def links
-    # This method return website links
+  def top_links
+    @website.top_links
+  end
+
+  def footer_links
+    @website.footer_links
+  end
+
+  def footer_links
     @website.website_links
   end
 
@@ -104,6 +162,10 @@ class WebsiteDataDrop < Liquid::Drop
   def photos
     # This method retunr website photos
     @website.hotel.photos
+  end
+
+  def about_text
+    @website.about_text
   end
 
 end

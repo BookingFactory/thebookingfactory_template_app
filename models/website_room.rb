@@ -1,12 +1,8 @@
 class WebsiteRoom < Sequel::Model
   many_to_one :website_data
-  one_to_many :room_type
+  one_to_many :room_types
 
-  def room_types
-    puts self.room_type
-  end
-
-  liquid_methods :name, :description
+  liquid_methods :name, :description, :room_types, :methods
 end
 
 WebsiteRoom.set_dataset :website_rooms

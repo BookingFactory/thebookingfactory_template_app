@@ -12,6 +12,8 @@ class WebsiteAboutPhoto < Sequel::Model
     }
   end
 
+  liquid_methods :image
+
 end
 
 WebsiteAboutPhoto.set_dataset :website_about_photos
