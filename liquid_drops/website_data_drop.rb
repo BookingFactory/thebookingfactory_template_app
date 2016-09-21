@@ -87,11 +87,6 @@ class WebsiteDataDrop < Liquid::Drop
     @website.booking_button_color
   end
 
-  def blog_records
-    # This methods return website blog records
-    @website.website_blog_records
-  end
-
   def features
     # This method return website fetaures
     @website.website_features
@@ -130,10 +125,6 @@ class WebsiteDataDrop < Liquid::Drop
     @website.footer_links
   end
 
-  def footer_links
-    @website.website_links
-  end
-
   def custom_room_photos
     # This methods return website custom room photos
     @website.website_custom_room_photos
@@ -166,6 +157,10 @@ class WebsiteDataDrop < Liquid::Drop
 
   def about_text
     @website.about_text
+  end
+
+  def blog_records
+    @website.website_blog_records
   end
 
 end

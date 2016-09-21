@@ -1,2 +1,5 @@
 <div class="container">
+  {% for photo in website_data.gallery_photos %}
+    <img src="{{ photo.image | attachment_url: 'original' }}" />
+  {% endfor %}
 </div>

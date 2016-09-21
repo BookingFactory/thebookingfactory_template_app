@@ -4,6 +4,7 @@ require "sinatra/namespace"
 require "sinatra/config_file"
 require "sequel"
 require "liquid"
+require "./config.rb"
 
 DB = Sequel.postgres(ENV['BUQIT_DB_NAME'],
   :user => ENV['BUQIT_DB_USERNAME'],
@@ -129,6 +130,15 @@ class Website < Sinatra::Base
         load_hotel_and_data
         liquid :book_page, :locals => { :website_data => @drop }
       end
+    end
+
+    post 'send_email' do
+      if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
+        if params[:name] != '' && params[:text] != '' && params[:email] != ''
+          Pony
+        end
+      end
+      redirect '/'
     end
   end
 
@@ -276,6 +286,10 @@ class Website < Sinatra::Base
         raise Sinatra::NotFound
       end
     end
+  end
+
+  def is_number?(string)
+    true if Integer(string) rescue false
   end
 
 end
