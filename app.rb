@@ -135,6 +135,7 @@ class Website < Sinatra::Base
     post 'send_email' do
       if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
         if params[:name] != '' && params[:text] != '' && params[:email] != ''
+          # here we should pass pony mail settings
           Pony
         end
       end
@@ -235,6 +236,16 @@ class Website < Sinatra::Base
         "Render custom page"
       end
     end
+
+    post 'send_email' do
+      if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
+        if params[:name] != '' && params[:text] != '' && params[:email] != ''
+          Pony
+        end
+      end
+      redirect '/'
+    end
+
   end
 
   not_found do
