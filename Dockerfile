@@ -37,6 +37,8 @@ RUN . /etc/profile.d/rbenv.sh && cd /website_engine && gem install bundle && bun
 
 ADD . /website_engine
 
-EXPOSE 3333
+EXPOSE 3000 3000
 
 VOLUME /Users/kirill/web-development/EFS_exmp/views/
+
+CMD thin start -p 3000
