@@ -1,0 +1,49 @@
+#Example unit service
+
+[Unit]
+Description=Website engine-%i
+
+# Requirements
+Requires=etcd2.service
+Requires=docker.service
+
+# Dependency ordering
+After=etcd2.service
+After=docker.service
+
+# Try to start discovery too
+Wants=buuqit-discovery@%i.service
+
+[Service]
+User=core
+# Let the process take awhile to start up (for first run Docker containers)
+TimeoutStartSec=0
+
+# Change killmode from "control-group" to "none" to let Docker remove
+# work correctly.
+KillMode=none
+
+# Get CoreOS environmental variables
+EnvironmentFile=/etc/environment
+
+# Pre-start and Start
+## Directives with "=-" are allowed to fail without consequence
+ExecStartPre=-/usr/bin/docker kill website_engine
+ExecStartPre=-/usr/bin/docker rm website_engine
+ExecStartPre=/usr/bin/docker pull registry.buuqit.com:5001/buuqit:latest
+
+ExecStart=/bin/bash -c '\
+/usr/bin/docker run --name website_engine \
+                              -p 8080:8080 \
+                              -e RACK_ENV=$(/usr/bin/etcdctl get /services/config/rack_env) \
+                              -e ALLOWED_HOSTS=$(/usr/bin/etcdctl get /services/config/allowed_hosts) \
+                              -e DATABASE_URL=$(/usr/bin/etcdctl get /services/db/postgresql)
+
+# Stop
+ExecStop=/usr/bin/docker stop website_engine
+
+Restart=always
+RestartSec=5s
+
+[X-Fleet]
+Conflicts=website_engine@*.service
