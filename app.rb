@@ -6,12 +6,8 @@ require "sequel"
 require "liquid"
 require "./config.rb"
 
-DB = Sequel.postgres(ENV['BUQIT_DB_NAME'],
-  :user => ENV['BUQIT_DB_USERNAME'],
-  :password => ENV['BUQIT_DB_PASSWORD'],
-  :host => 'localhost',
-  :port => 5432
-)
+
+DB = Sequel.connect("postgres://#{ENV['BUQIT_DB_USERNAME']}:#{ENV['BUQIT_DB_PASSWORD']}@#{ENV['BUQUIT_DB_HOST']}/#{ENV['BUQIT_DB_NAME']}")
 
 Dir.glob("./liquid_filters/*.rb") do |filter|
   require "#{filter}"
@@ -31,9 +27,7 @@ class Website < Sinatra::Base
 
   config_file "./config/config.yml"
 
-  configure do
-
-  end
+  set :views, settings.views_path
 
   namespace '/' do
 

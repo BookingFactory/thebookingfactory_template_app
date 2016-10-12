@@ -5,4 +5,4 @@ class WebsiteCustomRoom < Sequel::Model
   liquid_methods :title, :description
 end
 
-WebsiteCustomRoomPhoto.set_dataset :website_custom_room
+WebsiteCustomRoom.set_dataset :website_custom_room

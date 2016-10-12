@@ -28,8 +28,11 @@ ENV PATH "/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/sbin:/usr/local
 ENV BUQIT_DB_NAME     buuqit
 ENV BUQIT_DB_USERNAME buuqit_user
 ENV BUQIT_DB_PASSWORD buuqit_password
+ENV BUQUIT_DB_HOST    192.168.1.127
+ENV RACK_ENV          production
 
 WORKDIR /website_engine
+
 ADD Gemfile /website_engine/Gemfile
 ADD Gemfile.lock /website_engine/Gemfile.lock
 
@@ -37,8 +40,4 @@ RUN . /etc/profile.d/rbenv.sh && cd /website_engine && gem install bundle && bun
 
 ADD . /website_engine
 
-EXPOSE 3000 3000
-
-VOLUME /Users/kirill/web-development/EFS_exmp/views/
-
-CMD thin start -p 3000
+CMD thin start
