@@ -1,4 +1,5 @@
 require 'pony'
+require 'uri'
 
 Pony.options = {
   :from => 'from',

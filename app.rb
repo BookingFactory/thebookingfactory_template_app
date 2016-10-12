@@ -7,7 +7,7 @@ require "liquid"
 require "./config.rb"
 
 
-DB = Sequel.connect("postgres://#{ENV['BUQIT_DB_USERNAME']}:#{ENV['BUQIT_DB_PASSWORD']}@#{ENV['BUQUIT_DB_HOST']}/#{ENV['BUQIT_DB_NAME']}")
+DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
 
 Dir.glob("./liquid_filters/*.rb") do |filter|
   require "#{filter}"
