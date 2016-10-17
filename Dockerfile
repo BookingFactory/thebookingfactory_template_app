@@ -23,7 +23,8 @@ RUN chmod +x /etc/profile.d/rbenv.sh
 RUN . /etc/profile.d/rbenv.sh && rbenv install 2.3.1 && rbenv rehash && rbenv global 2.3.1
 
 ENV RBENV_ROOT /usr/local/rbenv
-ENV PATH       "/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH       "/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/sbin:/rusr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV RACK_ENV   production
 
 WORKDIR /website_engine
 
