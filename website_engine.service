@@ -36,8 +36,8 @@ ExecStart=/bin/bash -c '\
 /usr/bin/docker run --name website_engine \
                               -p 8080:8080 \
                               -e RACK_ENV=$(/usr/bin/etcdctl get /services/config/rack_env) \
-                              -e ALLOWED_HOSTS=$(/usr/bin/etcdctl get /services/config/allowed_hosts) \
-                              -e DATABASE_URL=$(/usr/bin/etcdctl get /services/db/postgresql)
+                              -e DATABASE_URL=$(/usr/bin/etcdctl get /services/db/postgresql) \
+                              -v /mnt/efs:/templates
 
 # Stop
 ExecStop=/usr/bin/docker stop website_engine

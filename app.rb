@@ -6,12 +6,7 @@ require "sequel"
 require "liquid"
 require "./config.rb"
 
-
 DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
-
-Dir.glob("./liquid_filters/*.rb") do |filter|
-  require "#{filter}"
-end
 
 Dir.glob("./models/*.rb") do |model|
   require "#{model}"
@@ -21,13 +16,22 @@ Dir.glob("./liquid_drops/*.rb") do |drop|
   require "#{drop}"
 end
 
+Dir.glob("./liquid_filters/*.rb") do |filter|
+  require "#{filter}"
+end
+
 class Website < Sinatra::Base
+
   register Sinatra::ConfigFile
   register Sinatra::Namespace
 
   config_file "./config/config.yml"
 
   set :views, settings.views_path
+
+  use Rack::Auth::Basic, "Restricted Area" do |username, password|
+    username == 'buuqit' and password == '0sx3092j'
+  end
 
   namespace '/' do
 

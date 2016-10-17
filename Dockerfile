@@ -20,13 +20,10 @@ RUN echo 'export PATH="$RBENV_ROOT/bin:$PATH"' >> /etc/profile.d/rbenv.sh
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
 RUN chmod +x /etc/profile.d/rbenv.sh
 
-RUN . /etc/profile.d/rbenv.sh && rbenv install 2.1.2 && rbenv rehash && rbenv global 2.1.2
+RUN . /etc/profile.d/rbenv.sh && rbenv install 2.3.1 && rbenv rehash && rbenv global 2.3.1
 
 ENV RBENV_ROOT /usr/local/rbenv
 ENV PATH       "/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
-ENV DATABASE_URL postgress://buuqit_user:buuqit_password@192.168.1.127/buuqit
-ENV RACK_ENV     production
 
 WORKDIR /website_engine
 
