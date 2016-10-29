@@ -20,10 +20,16 @@ Dir.glob("./liquid_filters/*.rb") do |filter|
   require "#{filter}"
 end
 
+Dir.glob("./helpers/*.rb") do |helper|
+  require "#{helper}"
+end
+
 class Website < Sinatra::Base
 
   register Sinatra::ConfigFile
   register Sinatra::Namespace
+
+  helpers Sinatra::HTMLEscapeHelper
 
   config_file "./config/config.yml"
 
@@ -117,6 +123,7 @@ class Website < Sinatra::Base
 
     ["membership", ":lang/membership"].each do |route|
       get route do
+        pass if params[:lang] && params[:lang].length > 2
         load_hotel_and_data
         liquid :membership_page, :locals => { :website_data => @drop }
       end
@@ -257,7 +264,7 @@ class Website < Sinatra::Base
     @lang = params[:lang] ? params[:lang] : 'en'
 
     if settings.domains.split(',').include?(request.host) && params[:slug]
-      @hotel = Hotel.find(:slug => params[:slug])
+      @hotel = Hotel.where("lower(slug) = ?", html_safe(params[:slug]).downcase).last
       @base = "//#{request.host}/#{params[:slug]}/#{@lang}"
     else
       if request.host.split('.')[0] == "www"
