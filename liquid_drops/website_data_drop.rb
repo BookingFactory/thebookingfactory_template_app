@@ -1,8 +1,9 @@
 class WebsiteDataDrop < Liquid::Drop
 
-  def initialize(data)
+  def initialize(data, rand)
     # Here will be init website
     @website = data
+    @rand = rand
   end
 
   def hotel_name
@@ -100,6 +101,9 @@ class WebsiteDataDrop < Liquid::Drop
   def rooms
     # This method return website rooms
     @website.website_rooms
+    @website.website_rooms.each do |room|
+      puts room.room_type
+    end
   end
 
   def custom_rooms
@@ -118,10 +122,12 @@ class WebsiteDataDrop < Liquid::Drop
   end
 
   def top_links
+    # This method return top links
     @website.top_links
   end
 
   def footer_links
+    # This methods return footer links
     @website.footer_links
   end
 
@@ -151,16 +157,62 @@ class WebsiteDataDrop < Liquid::Drop
   end
 
   def photos
-    # This method retunr website photos
+    # This method return website photos
     @website.hotel.photos
   end
 
   def about_text
+    # This method return website about text
     @website.about_text
   end
 
   def blog_records
+    # This method return all blog records
     @website.website_blog_records
+  end
+
+  def map_center_lat
+    # This method return map latitude
+    @website.map_center_lat
+  end
+
+  def map_center_lng
+    # This method return map langitude
+    @website.map_center_lng
+  end
+
+  def mobile_menu_fixed
+    @website.mobile_menu_fixed
+  end
+
+  # This method return all avaliable langs in hotel
+
+  def langs
+    @website.hotel.website_datas_dataset.where({ :status => 'publish' }).map { |rec| rec.lang }
+  end
+
+  def membership_placement
+    @website.hotel.member_settings.placement
+  end
+
+  def membership_description_color
+    @website.hotel.member_settings.description_color
+  end
+
+  def membership_from_color
+    @website.hotel.member_settings.from_color
+  end
+
+  def membership_active
+    @website.hotel.membership_active
+  end
+
+  def rand_a
+    @rand[:a]
+  end
+
+  def rand_b
+    @rand[:b]
   end
 
 end
