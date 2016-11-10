@@ -8,14 +8,7 @@ require "./config.rb"
 require 'better_errors'
 require 'binding_of_caller'
 
-#DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
-
-DB = Sequel.postgres('buuqit',
-  :user => 'buuqit_user',
-  :password => 'buuqit_password',
-  :host => 'localhost',
-  :port => 5432
-)
+DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
 
 Dir.glob("./models/*.rb") do |model|
   require "#{model}"
@@ -170,7 +163,6 @@ class Website < Sinatra::Base
       get route do
         pass if params[:lang] && params[:lang].length > 2
         load_hotel_and_data
-        raise 'error'
         liquid :index, :locals => { :website_data => @drop }
       end
     end
@@ -227,8 +219,15 @@ class Website < Sinatra::Base
 
     ["/blog/:page", "/:lang/blog/:page"].each do |route|
       get route do
+        pass if params[:lang] && params[:lang].length > 2
         load_hotel_and_data
-        liquid :blog_record, :locals => { :website_data => @drop}
+        record = @data.website_blog_records_dataset.where(:slug => params[:page])
+        if record.any? && record.first
+          current_record = BlogRecrodDrop.new(record.first)
+          liquid :blog_record, :locals => { :website_data => @drop, :record => current_record }
+        else
+          liquid :not_found_page
+        end
       end
     end
 
@@ -256,7 +255,7 @@ class Website < Sinatra::Base
     ["/:page", "/:lang/:page"].each do |route|
       get route do
         load_hotel_and_data
-        "Render custom page"
+        liquid :custom_page, :locals => { :website_data => @drop }
       end
     end
 
@@ -317,8 +316,10 @@ class Website < Sinatra::Base
         @data = data[0]
         @template = @data.template.nil? ? '1' : @data.template
 
+        Website.set :root, File.dirname(__FILE__)
         Website.set :views, File.dirname(__FILE__) + "/views/#{@template}"
         Website.set :public_folder, File.dirname(__FILE__) + "/views/#{@template}/assets"
+        Website.set :static, true
 
         @drop = WebsiteDataDrop.new(@data, @rand)
       else
