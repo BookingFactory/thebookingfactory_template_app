@@ -7,6 +7,7 @@ require "liquid"
 require "./config.rb"
 require 'better_errors'
 require 'binding_of_caller'
+require "sinatra/json"
 
 DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
 
@@ -148,12 +149,34 @@ class Website < Sinatra::Base
       end
     end
 
-    post 'send_email' do
+    ["/:page", "/:lang/:page"].each do |route|
+      get route do
+        raise 'test'
+        load_hotel_and_data
+        number = @data.website_rooms_dataset.where(:slug => params[:page])
+        # room = @data.website_custom_rooms_dataset.where(:slug => params[:page])
+        # page = @data.website_pages_dataset.where(:slug => params[:page])
+        # raise 'test'
+        # if (page.any? && page[])
+        # end
+        # liquid :custom_page, :locals => { :website_data => @drop }
+        number_drop = NumberDrop.new(number.find.first)
+        liquid :number, :locals => { :website_data => @drop, :number => number_drop }
+      end
+    end
+
+    post 'send_email', :provides => :json do
       if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
         if params[:name] != '' && params[:text] != '' && params[:email] != ''
-          # here we should pass pony mail settings
-          Pony
+          status 200
+          json :status => "Ok", :msg => "Test message!"
+        else
+          status 403
+          json :status => "Error", :msg => "Invalid validation"
         end
+      else
+        status 403
+        json :status => "Error", :msg => "Invalid validation"
       end
     end
   end
@@ -255,15 +278,30 @@ class Website < Sinatra::Base
     ["/:page", "/:lang/:page"].each do |route|
       get route do
         load_hotel_and_data
-        liquid :custom_page, :locals => { :website_data => @drop }
+        number = @data.website_rooms_dataset.where(:slug => params[:page])
+        # room = @data.website_custom_rooms_dataset.where(:slug => params[:page])
+        # page = @data.website_pages_dataset.where(:slug => params[:page])
+        # raise 'test'
+        # if (page.any? && page[])
+        # end
+        # liquid :custom_page, :locals => { :website_data => @drop }
+        number_drop = NumberDrop.new(number.find.first)
+        liquid :number, :locals => { :website_data => @drop, :number => number_drop }
       end
     end
 
-    post 'send_email' do
+    post 'send_email', :provides => :json do
       if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
         if params[:name] != '' && params[:text] != '' && params[:email] != ''
-          #here we should pass pony params
+          status 200
+          json :status => "Ok", :msg => "Test message!"
+        else
+          status 403
+          json :status => "Error", :msg => "Invalid validation"
         end
+      else
+        status 403
+        json :status => "Error", :msg => "Invalid validation"
       end
     end
 
@@ -296,6 +334,7 @@ class Website < Sinatra::Base
         @hotel = @wd.hotel unless @wd.nil?
         lng = params[:lang] ? "/#{@lang}" : ""
         @base = "//#{request.host}#{lng}"
+        @self_domain_website = true
       elsif WebsiteDomain.where(domain: request.host).to_a.length > 0
         domains = WebsiteDomain.where(domain: request.host)
         domains.each do |domain|
