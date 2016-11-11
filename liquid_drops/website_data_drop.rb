@@ -101,9 +101,6 @@ class WebsiteDataDrop < Liquid::Drop
   def rooms
     # This method return website rooms
     @website.website_rooms
-    @website.website_rooms.each do |room|
-      puts room.room_type
-    end
   end
 
   def custom_rooms
@@ -205,6 +202,10 @@ class WebsiteDataDrop < Liquid::Drop
 
   def membership_active
     @website.hotel.membership_active
+  end
+
+  def membership_text
+    @website.membership_text
   end
 
   def rand_a
