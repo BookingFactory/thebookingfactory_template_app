@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>
+    {{website_data.faq_title}}
+  </h2>
+  {% for question in website_data.questions %}
+    <div class="question-block">
+      <p class="question">
+        <i class="fa fa-question-circle"></i>
+        {{question.question}}
+      </p>
+      <p class="anwser">
+        {{question.answer}}
+      </p>
+    </div>
+  {% endfor %}
+</div>

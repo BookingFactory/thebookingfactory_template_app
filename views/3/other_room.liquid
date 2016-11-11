@@ -1,0 +1,35 @@
+<!-- Main photo block -->
+<div class="main-photo extra-small" style="background-image: url({{website_data.header_image | attachment_url: 'top_line' }});">
+  <div class="background"></div>
+</div>
+
+<div class="container content-zone room-page">
+  <div class="row">
+    <div class="col-md-4">
+      {{room.description}}
+    </div>
+    <div class="col-md-8">
+      {% if room.website_custom_room_photos.size > 0 %}
+        <div class="big-photo">
+          <img src="" />
+        </div>
+        <div class="small-photos">
+          <ul>
+            {% for photo in room.website_custom_room_photos %}
+              {% if foorloop.index == 0 %}
+              <li class="active">
+                {% else %}
+                <li>
+                  {% endif %}
+                <a href="">
+                  <img src="" class="hidden-xs"/>
+                  <img src="" class="hidden-sm hidden-lg hidden-md" />
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

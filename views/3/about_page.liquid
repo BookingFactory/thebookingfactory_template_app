@@ -1,0 +1,17 @@
+<!-- Main photo block -->
+<div class="main-photo extra-small" style="background-image: url({{website_data.header_image | attachment_url: 'top_line' }});">
+  <div class="background"></div>
+</div>
+
+<div class="container content-zone about-page">
+  <div class="row">
+    <div class="col-sm-7">
+      {{website_data.about_text}}
+    </div>
+    <div class="col-sm-5">
+      {% for photo in website_data.about_photos limit: 2 offset: 0 %}
+        <img class="about-photo" src="{{ photo.image | attachment_url: 'public_big' }}" />
+      {% endfor %}
+    </div>
+  </div>
+</div>

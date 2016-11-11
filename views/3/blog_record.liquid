@@ -1,0 +1,33 @@
+<!-- Main photo block -->
+<div class="main-photo extra-small" style="background-image: url({{website_data.header_image | attachment_url: 'top_line' }});">
+  <div class="background"></div>
+</div>
+
+{{ record.methods}}
+
+{% if record.cover.present? %}
+  <div class="container content-zone blog-record">
+    <h1>{{record.title}}<h1>
+    <div class="sticker">
+      <div class="day"> {{ record.created_at | date: "%d" }} </div>
+      <div class="month"> {{ record.created_at | date: "%B" }} </div>
+    </div>
+    <img class="cover" src="{{record.image | attachment_url: 'big'}}" alt="{{record.all_text}}" />
+    {{record.text}}
+    {% if website_data.disqus_code.present? %}
+      {{website_data.disqus_code}}
+    {% endif %}
+  </div>
+{% else %}
+  <div class="container content-zone blog-record without-cover-image">
+    <h1> {{record.title}} </h1>
+    <div class="sticker">
+      <div class="day"> {{ record.created_at | date: "%d" }} </div>
+      <div class="month"> {{ record.created_at | date: "%B" }} </div>
+    </div>
+    {{record.text}}
+    {% if website_data.disqus_code.present? %}
+      {{website_data.disqus_code}}
+    {% endif %}
+  </div>
+{% endif %}
