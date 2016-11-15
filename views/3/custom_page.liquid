@@ -11,7 +11,7 @@
       </div>
       <div class="col-md-5">
         {% for photo in page.website_page_photos %}
-          <img src="{{ photo | attachment_url: 'public_big' }}" class="about-photo" />
+          <img src="{{ photo.image | attachment_url: 'public_big' }}" class="about-photo" />
         {% endfor %}
       </div>
     </div>

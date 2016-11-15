@@ -20,7 +20,7 @@
               {% else %}
                 <i class="fa fa-circle"></i>
               {% endif %}
-              {{facility.title}}
+              {{ facility.title | get_translation: website_data.id, website_data.lang }}
             </li>
           {% endfor %}
         </ul>
@@ -29,7 +29,7 @@
     <div class="col-md-8">
       {% if number.room_type.photos.size > 0 %}
         <div class="big-photo">
-          <img src="" />
+          <img src="{{ number.room_type.photos.first.image | attachment_url: 'public_big' }}" />
         </div>
       {% endif %}
     </div>
@@ -44,14 +44,14 @@
         <div class="small-photos">
           <ul>
             {% for photo in number.room_type.photos %}
-              {% if foorloop.index == 0 %}
+              {% if forloop.index0 == 0 %}
               <li class="active">
               {% else %}
               <li>
               {% endif %}
-                <a href="">
-                  <img src="" class="hidden-xs"/>
-                  <img src="" class="hidden-sm hidden-lg hidden-md" />
+                <a href="{{ photo.image | attachment_url: 'public_big' }}">
+                  <img src="{{ photo.image | attachment_url: 'public_small' }}" class="hidden-xs" />
+                  <img src="{{ photo.image | attachment_url: 'public_big' }}" class="hidden-sm hidden-lg hidden-md" />
                 </a>
               </li>
             {% endfor %}

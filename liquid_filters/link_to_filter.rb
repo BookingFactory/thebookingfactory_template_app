@@ -1,5 +1,9 @@
+require "sinatra"
+require "sinatra/base"
+
 module LinkToFilter
-  def url_for url_fragment, mode=:path_only
+
+  def link_to url_fragment, mode=:path_only
     case mode
     when :path_only
       base = request.script_name
@@ -12,7 +16,7 @@ module LinkToFilter
       end
       base = "#{request.scheme}://#{request.host}#{port}#{request.script_name}"
     else
-      raise "Unknown script_url mode #{mode}"
+      puts "Unknown script_url mode #{mode}"
     end
     "#{base}#{url_fragment}"
   end

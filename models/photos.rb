@@ -1,5 +1,6 @@
 class Photo < Sequel::Model
   many_to_one :hotel
+  one_to_many :room_types
 
   FILE_FIELD = 'photos'
 

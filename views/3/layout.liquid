@@ -44,7 +44,7 @@
         <ul class="nav navbar-nav navbar-right">
           {% for link in website_data.top_links %}
             <li>
-              <a href="{{ link.value | link_to }}"> {{ link.title }} </a>
+              <a href="{{ link.value }}"> {{ link.title }} </a>
             </li>
           {% endfor %}
           {% if website_data.langs.size > 1 %}

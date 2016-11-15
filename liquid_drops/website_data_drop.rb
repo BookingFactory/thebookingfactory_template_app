@@ -1,9 +1,14 @@
 class WebsiteDataDrop < Liquid::Drop
 
-  def initialize(data, rand)
+  def initialize(data, rand, lang)
     # Here will be init website
     @website = data
     @rand = rand
+    @lang = lang
+  end
+
+  def id
+    @website.id
   end
 
   def hotel_name
@@ -214,6 +219,10 @@ class WebsiteDataDrop < Liquid::Drop
 
   def rand_b
     @rand[:b]
+  end
+
+  def lang
+    @lang
   end
 
 end
