@@ -3,6 +3,7 @@ class Hotel < Sequel::Model
   one_to_many :invisible_photos
   one_to_many :gallery_photos
   one_to_many :photos
+  one_to_one :github_account
 
   liquid_methods :photos
 end
