@@ -28,4 +28,8 @@ class BlogRecrodDrop < Liquid::Drop
     @record.disqus_code
   end
 
+  def meta_description
+    @record.meta_description
+  end
+
 end

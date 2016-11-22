@@ -1,10 +1,12 @@
 class WebsiteDataDrop < Liquid::Drop
 
-  def initialize(data, rand, lang)
+  def initialize(data, rand, lang, base, request)
     # Here will be init website
     @website = data
     @rand = rand
     @lang = lang
+    @base = base
+    @request = request
   end
 
   def id
@@ -61,8 +63,20 @@ class WebsiteDataDrop < Liquid::Drop
     @website.faq_title
   end
 
+  def page_title
+    @website.page_title
+  end
+
   def terms_and_conditions
     @website.terms_and_conditions
+  end
+
+  def page_keywords
+    @website.page_keywords
+  end
+
+  def page_description
+    @website.page_description
   end
 
   def privacy_policy
@@ -183,6 +197,10 @@ class WebsiteDataDrop < Liquid::Drop
     @website.map_center_lng
   end
 
+  def zoom_level
+    @website.hotel.zoom
+  end
+
   def mobile_menu_fixed
     @website.mobile_menu_fixed
   end
@@ -211,6 +229,14 @@ class WebsiteDataDrop < Liquid::Drop
 
   def membership_text
     @website.membership_text
+  end
+
+  def public_booking_url
+    "#{@base.gsub('localhost', 'localhost:3000').gsub('http://', '//')}book_form?#{@request.fullpath.split('?')[1]}}"
+  end
+
+  def host
+    @request.host
   end
 
   def rand_a

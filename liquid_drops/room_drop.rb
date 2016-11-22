@@ -11,4 +11,8 @@ class RoomDrop < Liquid::Drop
 
   def icon
   end
+
+  def meta_description
+    @room.meta_description
+  end
 end

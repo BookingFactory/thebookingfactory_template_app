@@ -8,4 +8,8 @@ class PageDrop < Liquid::Drop
 
   def content
   end
+
+  def meta_description
+    @page.meta_description
+  end
 end
