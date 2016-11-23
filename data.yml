@@ -130,3 +130,61 @@ website_blog_records:
     page_title: "some"
     meta_description: "some"
     alt_text: nil
+website_testimonials:
+  - id: 1
+    title: "Awesome hotel"
+    body: "Really awesome hotel from uk"
+    name: nil
+website_translations:
+  - id: 1
+    key: "Balcony"
+    category: "facility"
+    value: ""
+  - id: 2
+    key: "En-Suite Bathroom"
+    category: "facility"
+    value: ""
+  - id: 3
+    key: "Mini Fridge"
+    category: "facility"
+    value: ""
+  - id: 4
+    key: "Tea & Coffee Facilities"
+    value: ""
+    category: "facility"
+  - id: 5
+    key: "LCD Television"
+    value: ""
+    category: "facility"
+  - id: 6
+    key: "Air Conditioning"
+    value: ""
+    category: "facility"
+  - id: 7
+    key: "2 x Single Beds"
+    value: ""
+    category: "faciity"
+  - id: 8
+    key: "Single Bed"
+    category: "facility"
+    value: ""
+  - id: 9
+    key: "4ft6 Double Bed"
+    value: ""
+    category: "facility"
+  - id: 10
+    key: "King Size Bed"
+    value: ""
+    category: "facility"
+  - id: 11
+    key: "Free WiFi"
+    category: "facility"
+    value: ""
+  - id: 12
+    key: "Dog Friendly"
+    value: ""
+    category: "facility"
+  - id: 13
+    key: "Sofa Bed"
+    category: "facility"
+    value: ""
