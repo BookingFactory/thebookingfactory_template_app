@@ -3,6 +3,8 @@ require "sinatra/base"
 require "liquid"
 require "sinatra/json"
 require "yaml"
+require 'better_errors'
+require 'binding_of_caller'
 require 'ostruct'
 
 Dir.glob("./liquid_drops/*.rb") do |drop|
@@ -19,6 +21,11 @@ class Website < Sinatra::Base
   set :views, File.dirname(__FILE__) + '/views'
   set :public_folder, File.dirname(__FILE__) + "/views/assets"
   set :static, true
+
+  configure :development do
+    use BetterErrors::Middleware
+    BetterErrors.application_root = File.expand_path('..', __FILE__)
+  end
 
   before do
     data = OpenStruct.new(YAML.load_file("data.yml"))
@@ -122,7 +129,6 @@ class Website < Sinatra::Base
   private
 
   def is_number?(string)
-   true if Integer(string) rescue false
   end
 
 end
