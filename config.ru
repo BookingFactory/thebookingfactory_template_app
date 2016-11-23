@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'bundler'
-require "./app"
+require './app'
 
 Bundler.require
 

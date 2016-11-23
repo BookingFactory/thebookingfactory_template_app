@@ -1,0 +1,147 @@
+id: 1
+hotel_id: 1
+logo_file_name: "ubuntu-logo-32.png"
+header_image_file_name: "demo_hotel2.jpg"
+header_text_1: "Insert Header Text Here"
+header_text_2: "Insert Header Subtext Here"
+booking_button_text: "Book Now"
+text_area: "<h1>Great hotel title Here</h1><p>We’re centrally located, with good food, loads of culture, and plenty of picture opportunities less than a mile away. There are also tons of day trip options if that’s your thing. Just pop over to the front desk, and we’ll point you in the right direction.</p><p>We don’t need to mention our free Wi-Fi, LCD televisions in every room, or that we have some of the most comfortable beds on the planet. Those should be standard in every hotel. The only thing we care about</p>"
+features_title: "Our Highlights and Features"
+features_background_image_file_name: "demo_hotel2.jpg"
+tripadvisor_code: nil
+tripadvisor_listing_link: nil
+faq_title: "Test Questions"
+map_zoom_level: 8
+map_center_lat: 55.0
+map_center_lng: 55.0
+contact_form_email: "some@email.com"
+contact_area_title: "Contact Us"
+contact_description_text: "Please contact us if you have any questions or special requests"
+phone_number: "89999999999"
+email_address: "some_other@email.com"
+address: "Some address"
+page_titile: "Page Titile"
+page_description: nil
+page_keywords: nil
+terms_and_conditions: "<div>&lt;div class=\"container\"&gt;</div><div>&nbsp; &lt;h1&gt; WEEEEEE &lt;/h1&gt;</div><div>&lt;/div&gt;</div><div><br></div><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><div><br></div><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br></div><div><br></div><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><div><br></div><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><div><br></div><div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div><div><br></div><div><span style=\"line-height: 20px;\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></div>"
+privacy_policy: "<h1>PRIVACY POLICY</h1><p>At Test Hotel we are committed to safeguarding and preserving the privacy of our visitors.&nbsp;</p><p>This Privacy Policy explains what happens to any personal data that you provide to us, or that we collect from you whilst you visit our site.&nbsp;</p><p>We do update this Policy from time to time so please do review this Policy regularly.</p><p><strong>Information We Collect&nbsp;</strong></p><p>In running and maintaining our website we may collect and process the following data about you:</p><p>i.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Information about your use of our site including details of your visits such as pages viewed and the resources that you access. Such information includes traffic data, location data and other communication data.</p><p>ii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Information provided voluntarily by you. For example, when you register for information or make a purchase.&nbsp;</p><p>iii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Information that you provide when you communicate with us by any means.</p><p><strong>Use of Cookies&nbsp;</strong></p><p>Cookies provide information regarding the computer used by a visitor. We may use cookies where appropriate to gather information about your computer fin order to assist us in improving our website.&nbsp;</p><p>We may gather information about your general internet use by using the cookie.&nbsp; Where used, these cookies are downloaded to your computer and stored on the computer’s hard drive. Such information will not identify you personally. It is statistical data. This statistical data does not identify any personal details whatsoever&nbsp;</p><p>You can adjust the settings on your computer to decline any cookies if you wish.&nbsp; This can easily be done by activating the reject cookies setting on your computer.&nbsp;</p><p>Our advertisers may also use cookies, over which we have no control.&nbsp; Such cookies (if used) would be downloaded once you click on advertisements on our website.</p><p><strong>Use of Your Information</strong></p><p>We use the information that we collect from you to provide our services to you.&nbsp; In addition to this we may use the information for one or more of the following purposes:</p><p>i.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To provide information to you that you request from us relating to our products or services.&nbsp;&nbsp;</p><p>ii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To provide information to you relating to other products that may be of interest to you. Such additional information will only be provided where you have consented to receive such information.&nbsp;</p><p>iii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To inform you of any changes to our website, services or goods and products.</p><p>If you have previously purchased goods or services from us we may provide to you details of similar goods or services, or other goods and services, that you may be interested in.&nbsp;</p><p>Where your consent has been provided in advance we may allow selected third parties to use your data to enable them to provide you with information regarding unrelated goods and services which we believe may interest you.&nbsp; Where such consent has been provided it can be withdrawn by you at any time.</p><p><strong>Storing Your Personal Data</strong></p><p>In operating our website it may become necessary to transfer data that we collect from you to locations outside of the European Union for processing and storing. By providing your personal data to us, you agree to this transfer, storing or processing. We do our upmost to ensure that all reasonable steps are taken to make sure that your data is treated stored securely.</p><p>Unfortunately the sending of information via the internet is not totally secure and on occasion such information can be intercepted. We cannot guarantee the security of data that you choose to send us electronically, Sending such information is entirely at your own risk.&nbsp;</p><p><strong>Disclosing Your Information</strong></p><p>We will not disclose your personal information to any other party other than in accordance with this Privacy Policy and in the circumstances detailed below:</p><p>i.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the event that we sell any or all of our business to the buyer.</p><p>ii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Where we are legally required by law to disclose your personal information.</p><p>iii.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To further fraud protection and reduce the risk of fraud.</p><p><strong>Third Party Links&nbsp;</strong></p><p>On occasion we include links to third parties on this website. Where we provide a link it does not mean that we endorse or approve that site’s policy towards visitor privacy. You should review their privacy policy before sending them any personal data.&nbsp;</p><p><strong>Access to Information</strong></p><p>In accordance with the Data Protection Act 1998 you have the right to access any information that we hold relating to you. Please note that we reserve the right to charge a fee of £10 to cover costs incurred by us in providing you with the information.&nbsp;&nbsp;</p><p><strong>Contacting Us</strong></p><p>Please do not hesitate to contact us regarding any matter relating to this Privacy Policy</p>"
+logo_text: "Test Hotel"
+booking_link: ""
+about_text: "<p>This is about page</p><p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p><strong style=\"margin: 0px; padding: 0px; font-family: &quot;Open Sans&quot;, Arial, sans-serif; line-height: 20px; text-align: justify;\">Lorem Ipsum</strong><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; line-height: 20px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>"
+booking_button_color: nil
+ga_code: nil
+lang: "en"
+mobile_menu_fixed: true
+disqus_code: nil
+contact_page_title: nil
+contact_meta_description: nil
+membership_text: nil
+brand_color: nil
+twitter: nil
+facebook: nil
+linkedin: nil
+youtube: nil
+googleplus: nil
+pinterest: nil
+instagram: nil
+room_section_title: "Our Rooms"
+room_section_description: nil
+faq_section_description: "Some description"
+features_section_description: nil
+blog_section_title: "Some Blog Post"
+blog_section_description: "This is about blog&nbsp;"
+features_style: nil
+hotel:
+  name: "Test Hotel"
+  zoom: 8
+  membership_active:
+  member_settings:
+    placemment: 'top'
+    description_color:
+    from_color:
+website_questions:
+  question:
+    id: 1
+    question: "What about wi-fi?"
+    answer: "Free wi-fi in each room.&nbsp"
+  question:
+    id: 2
+    question: "Does your hotel have lifts?"
+    answer: "<span style=\"color: rgba(0, 0, 0, 0.498039); font-family: Roboto, sans-serif; font-size: 16px; line-height: 22.8571px;\">Nah, our guests said they love stairs because it keeps\u2028 em’ feeling energised. It’s how we keep the vibe alive!</span>"
+  question:
+    id: 3
+    question: "Can I pay in advance?"
+    answer: "<span style=\"color: rgba(0, 0, 0, 0.498039); font-family: Roboto, sans-serif; font-size: 16px; line-height: 22.8571px;\">Maybe, Maybe not! Depends on what room &amp; rate you choose.\u2028 Check your confirmation to know for sure.</span>"
+website_features:
+  feature:
+    id: 1
+    icon: "wifi"
+    title: "Free WiFi"
+    description: "Unlimited Free WiFi in every corner of the hotel, for all your facebooking needs."
+  feature:
+    id: 2
+    icon: "home"
+    title: "Great Location"
+    description: "Walk out the door and your 3 mins from the tube station, 5 mins from Harrods and 7 mins from Tower Bridge."
+  feature:
+    id: 3
+    icon: "coffee"
+    title: "Amazing Breakfast"
+    description: "Start your day with a full belly - Choose from freshly baked goods, Fresh cooked to order \"Full English\" or a tasty continental."
+  feature:
+    id: 4
+    icon: "car"
+    title: "Secure Parking"
+    description: "We have two parking spaces available, a charge of £25 per night is payable"
+  feature:
+    id: 5
+    icon: "paw"
+    title: "Dogs Welcome"
+    description: "Bring along your best friend, the lucky creature will get a comfy clean bed and a special doggy breakfast. Restrictions Apply."
+  feature:
+    id: 6
+    icon: "leaf"
+    title: "Vegetarian Options"
+    description: We can cater for any dietary needs, please tell us in advance!"
+website_footers:
+  footer:
+    id: 1
+    title: "About"
+    text:  "<span style=\"color: rgb(255, 255, 255); font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; background-color: rgb(60, 60, 60);\">The demo hotel provides luxury accommodation for visitors to the beautiful City of London. We are situated within 5 minutes of the central bus station and within 1 minute walk of central tube line</span>"
+  footer:
+    id: 2
+    title: Important Times"
+    text: "<p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Reception is open from 7am until 11pm</p><p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Checkin is available from 2pm till 11pm</p><p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Breakfast is Served from 7am till 10am</p><p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Latest Checkout is 11am</p>"
+  footer:
+    id: 3
+    title: "Contact Us"
+    text: "<p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">To make a booking or find out more about our hotel please get in touch using one of the options below:</p><p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Phone - 01629 650005</p><p style=\"font-family: Roboto, sans-serif; font-size: 16px; line-height: 22px; color: rgb(255, 255, 255); background-color: rgb(60, 60, 60);\">Via Email -&nbsp;<a href=\"mailto:demo@demohotel.com\">demo@demohotel.com</a></p>"
+website_rooms:
+  room:
+    id: 1
+    visible: true
+    room_type_id: 14
+    slug: "standard"
+    description: "Our double rooms feature a super comfy, king-size Hypnos bed, a toasty duvet and choice of firm or soft pillows to guarantee you have a great night’s sleep."
+    introduction: nil
+website_custom_rooms:
+  room:
+    id: 1
+    title: "Strange Room"
+    description: "<p>small description</p><p><br></p>"
+    slug: "strange-room"
+    button_text: "button text"
+    page_title: "Some strange room"
+    meta_description: "meta description"
+    introduction: "introduction text"
+    visible: true
+website_blog_records:
+  record:
+    id: 1
+    title: "Some text"
+    slug: "some-text"
+    text: "<p>Some other text&nbsp;</p><p>&lt;script&gt; window.alert(1) &lt;/script&gt;</p>"
+    published: true
+    page_title: "some"
+    meta_description: "some"
+    alt_text: nil

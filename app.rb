@@ -1,19 +1,9 @@
 require "sinatra"
 require "sinatra/base"
-require "sinatra/namespace"
-require "sinatra/config_file"
-require "sequel"
 require "liquid"
-require "./config.rb"
-require 'better_errors'
-require 'binding_of_caller'
 require "sinatra/json"
-
-DB = Sequel.connect("postgres://#{ENV['DATABASE_USER']}:#{ENV['DATABASE_PASSWORD']}@#{ENV['DATABASE_HOST']}/#{ENV['DATABASE_NAME']}")
-
-Dir.glob("./models/*.rb") do |model|
-  require "#{model}"
-end
+require "yaml"
+require 'ostruct'
 
 Dir.glob("./liquid_drops/*.rb") do |drop|
   require "#{drop}"
@@ -23,387 +13,110 @@ Dir.glob("./liquid_filters/*.rb") do |filter|
   require "#{filter}"
 end
 
-Dir.glob("./helpers/*.rb") do |helper|
-  require "#{helper}"
-end
-
 class Website < Sinatra::Base
 
-  register Sinatra::ConfigFile
-  register Sinatra::Namespace
+  set :root, File.dirname(__FILE__)
+  set :views, File.dirname(__FILE__) + '/views'
+  set :public_folder, File.dirname(__FILE__) + "/views/assets"
+  set :static, true
 
-  helpers Sinatra::HTMLEscapeHelper
-
-  config_file "./config/config.yml"
-
-  configure :development do
-    use BetterErrors::Middleware
-    BetterErrors.application_root = File.expand_path('..', __FILE__)
+  before do
+    data = OpenStruct.new(YAML.load_file("data.yml"))
+    random = {
+      :a => rand(1..9),
+      :b => rand(1..9)
+    }
+    base = ''
+    lang = 'en'
+    @drop = WebsiteDataDrop.new(data, random, lang, base, request)
   end
 
-  use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    username == 'buuqit' and password == '0sx3092j'
+  get "/" do
+    liquid :index, :locals => { :website_data => @drop }
   end
 
-  set(:check_host) { |*array_of_hosts| condition { array_of_hosts.include?(request.host)} }
+  get "" do
+    liquid :index, :locals => { :website_data => @drop }
+  end
 
-  namespace '/:slug', :check_host => settings.domains.split(',') do
+  get "/terms-and-conditions" do
+    liquid :terms_and_conditions, :locals => { :website_data => @drop}
+  end
 
-    ["", "/:lang"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :index, :locals => { :website_data => @drop }
-      end
-    end
+  get "/privacy-policy" do
+    liquid :privacy_policy, :locals => { :website_data => @drop }
+  end
 
-    ["/terms-and-conditions", "/:lang/terms-and-conditions"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :terms_and_conditions, :locals => { :website_data => @drop}
-      end
-    end
+  get "/about" do
+    liquid :about_page, :locals => { :website_data => @drop }
+  end
 
-    ["/privacy-policy", "/:lang/privacy_policy"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :privacy_policy, :locals => { :website_data => @drop }
-      end
-    end
+  get "/faq" do
+    liquid :faq_page, :locals => { :website_data => @drop }
+  end
 
-    ["/about", "/:lang/about"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :about_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/contacts" do
+    liquid :contact_page, :locals => { :website_data => @drop }
+  end
 
-    ["/faq", "/:lang/faq"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :faq_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/blog" do
+    liquid :blog_page, :locals => { :website_data => @drop }
+  end
 
-    ["/contacts", "/:lang/contacts"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :contact_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/blog_next" do
+    liquid :blog_page, :locals => { :website_data => @drop }
+  end
 
-    ["/blog", "/:lang/blog"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :blog_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/blog/:page" do
+    current_record = BlogRecrodDrop.new(record.first)
+    liquid :blog_record, :locals => { :website_data => @drop, :record => current_record }
+  end
 
-    ["/blog_next", "/:lang/blog_next"].each do |route|
-      get route do
-        load_hotel_and_data
-        liquid :blog_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/gallery" do
+    liquid :gallery_page, :locals => { :website_data => @drop }
+  end
 
-    ["/blog/:page", "/:lang/blog/:page"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        record = @data.website_blog_records_dataset.where(:slug => params[:page])
-        if record.any? && record.first
-          current_record = BlogRecrodDrop.new(record.first)
-          liquid :blog_record, :locals => { :website_data => @drop, :record => current_record }
-        else
-          liquid :not_found_page
-        end
-      end
-    end
+  get "/membership" do
+    liquid :membership_page, :locals => { :website_data => @drop }
+  end
 
-    ["/gallery", "/:lang/gallery"].each do |route|
-      get route do
-        load_hotel_and_data
-        pass if params[:lang] && params[:lang].length > 2
-        liquid :gallery_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/book" do
+    liquid :book_page, :locals => { :website_data => @drop }
+  end
 
-    ["/membership", "/:lang/membership"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :membership_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/number_page" do
+    number_drop = NumberDrop.new(number)
+    liquid :number, :locals => { :website_data => @drop, :number => number_drop }
+  end
 
-    ["/book", "/:lang/book"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :book_page, :locals => { :website_data => @drop }
-      end
-    end
+  get "/room_page" do
+    room_drop = RoomDrop.new(room)
+    liquid :other_room, :locals => { :website_data => @drop, :room => room_drop }
+  end
 
-    ["/:page", "/:lang/:page"].each do |route|
-      get route do
-        load_hotel_and_data
+  get "/custom_page" do
+    page_drop = PageDrop.new(pages)
+    liquid :custom_page, :locals => { :website_data => @drop, :page => page_drop }
+  end
 
-        number = @data.website_rooms_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-        room = @data.website_custom_rooms_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-        page = @data.website_pages_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-
-
-        if (page && page.published) || number || room
-          if number
-            number_drop = NumberDrop.new(number)
-            liquid :number, :locals => { :website_data => @drop, :number => number_drop }
-          elsif room
-            room_drop = RoomDrop.new(room)
-            liquid :other_room, :locals => { :website_data => @drop, :room => room_drop }
-          elsif page
-            page_drop = PageDrop.new(pages)
-            liquid :custom_page, :locals => { :website_data => @drop, :page => page_drop }
-          end
-        else
-          liquid :not_found_page
-        end
-
-      end
-    end
-
-    post 'send_email', :provides => :json do
-      if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
-        if params[:name] != '' && params[:text] != '' && params[:email] != ''
-          status 200
-          json :status => "Ok", :msg => "Test message!"
-        else
-          status 403
-          json :status => "Error", :msg => "Invalid validation"
-        end
+  post 'send_email', :provides => :json do
+    if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
+      if params[:name] != '' && params[:text] != '' && params[:email] != ''
+        status 200
+        json :status => "Ok", :msg => "Test message!"
       else
         status 403
         json :status => "Error", :msg => "Invalid validation"
       end
-    end
-
-  end
-
-  namespace '/' do
-
-    ["", ":lang"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :index, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["terms-and-conditions", ":lang/terms-and-conditions"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :terms_and_conditions, :locals => { :website_data => @drop}
-      end
-    end
-
-    ["privacy-policy", ":lang/privacy_policy"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :privacy_policy, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["about", ":lang/about"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :about_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["faq", ":lang/faq"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :faq_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["contacts", ":lang/contacts"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :contact_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["blog", ":lang/blog"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :blog_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["blog_next", ":lang/blog_next"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :blog_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["blog/:page", ":lang/blog/:page"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        record = @data.website_blog_records_dataset.where(:slug => params[:page])
-        if record.any? && record.first
-          current_record = BlogRecrodDrop.new(record.first)
-          liquid :blog_record, :locals => { :website_data => @drop, :record => current_record }
-        else
-          liquid :not_found_page
-        end
-      end
-    end
-
-    ["gallery", ":lang/gallery"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :gallery_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["membership", ":lang/membership"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :membership_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    ["book", ":lang/book"].each do |route|
-      get route do
-        pass if params[:lang] && params[:lang].length > 2
-        load_hotel_and_data
-        liquid :book_page, :locals => { :website_data => @drop }
-      end
-    end
-
-    [":page", ":lang/:page"].each do |route|
-      get route do
-        load_hotel_and_data
-
-        number = @data.website_rooms_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-        room = @data.website_custom_rooms_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-        page = @data.website_pages_dataset.where("lower(slug) = ?", html_safe(params[:page]).downcase).first
-
-
-        if (page && page.published) || number || room
-          if number
-            number_drop = NumberDrop.new(number)
-            liquid :number, :locals => { :website_data => @drop, :number => number_drop }
-          elsif room
-            room_drop = RoomDrop.new(room)
-            liquid :other_room, :locals => { :website_data => @drop, :room => room_drop }
-          elsif page
-            page_drop = PageDrop.new(pages)
-            liquid :custom_page, :locals => { :website_data => @drop, :page => page_drop }
-          end
-        else
-          liquid :not_found_page
-        end
-
-      end
-    end
-
-    post 'send_email', :provides => :json do
-      if is_number?(params[:answer]) && Integer(params[:part_a]) + Integer(params[:part_b]) == Integer(params[:answer])
-        if params[:name] != '' && params[:text] != '' && params[:email] != ''
-          status 200
-          json :status => "Ok", :msg => "Test message!"
-        else
-          status 403
-          json :status => "Error", :msg => "Invalid validation"
-        end
-      else
-        status 403
-        json :status => "Error", :msg => "Invalid validation"
-      end
+    else
+      status 403
+      json :status => "Error", :msg => "Invalid validation"
     end
   end
 
   not_found do
     load_hotel_and_data
     liquid :not_found_page
-  end
-
-  private
-
-  def load_hotel_and_data
-
-    @lang = params[:lang] ? params[:lang] : 'en'
-
-    @rand = {
-      :a => rand(1..9),
-      :b => rand(1..9)
-    }
-
-    if settings.domains.split(',').include?(request.host) && params[:slug]
-      @hotel = Hotel.where("lower(slug) = ?", html_safe(params[:slug]).downcase).last
-      @base = "//#{request.host}/#{params[:slug]}/#{@lang}"
-    else
-      if request.host.split('.')[0] == "www"
-        redirect_address = "#{request.scheme}://#{request.host.gsub('www.', '')}#{request.path}"
-      elsif WebsiteData.where({url: request.host, status: "publish"}).to_a.length > 0
-        @wd = WebsiteData.where({url: request.host, status: 'publish'}).first
-        @hotel = @wd.hotel unless @wd.nil?
-        lng = params[:lang] ? "/#{@lang}" : ""
-        @base = "//#{request.host}#{lng}"
-        @self_domain_website = true
-      elsif WebsiteDomain.where(domain: request.host).to_a.length > 0
-        domains = WebsiteDomain.where(domain: request.host)
-        domains.each do |domain|
-          if domain.website_data.status == 'publish'
-            redirect_address = "#{request.scheme}://#{domain.website_data.url}#{request.path}"
-          end
-        end
-      end
-    end
-    if @hotel
-      data = []
-      @hotel.website_datas.each do |wd|
-        if wd.status == "publish" && wd.lang == @lang
-          data << wd
-        end
-      end
-      if data[0]
-        @data = data[0]
-        @template = @data.website_template_id.nil? ? '1' : @data.website_template_id
-
-        Website.set :root, File.dirname(__FILE__)
-        Website.set :views, File.dirname(__FILE__) + "/#{@template}"
-        Website.set :public_folder, File.dirname(__FILE__) + "/#{@template}/assets"
-        Website.set :static, true
-
-        @drop = WebsiteDataDrop.new(@data, @rand, @lang, @base, request)
-      else
-        raise Sinatra::NotFound
-      end
-    else
-      if redirect_address
-        redirect redirect_address, 301
-      else
-        raise Sinatra::NotFound
-      end
-    end
-  end
-
-  def is_number?(string)
-    true if Integer(string) rescue false
   end
 
 end
