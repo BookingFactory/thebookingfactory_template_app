@@ -119,4 +119,10 @@ class Website < Sinatra::Base
     liquid :not_found_page
   end
 
+  private
+
+  def is_number?(string)
+   true if Integer(string) rescue false
+  end
+
 end
