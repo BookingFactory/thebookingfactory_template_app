@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+     {{website_data.page_title}}
+
+     {% if record and record.title %}
+       : {{record.title}}
+     {% elsif page and page.title %}
+       : {{page.title}}
+     {% elsif room and room.title %}
+       : {{room.title}}
+     {% endif %}
+    </title>
+
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    {% if record and record.meta_description %}
+      <meta content="{{recrod.meta_description}}" name="description"/>
+    {% elsif page and page.meta_description %}
+      <meta content="{{page.meta_description}}" name="description"/>
+    {% elsif room and room.meta_description %}
+      <meta content="{{room.meta_description}}" name="description" />
+    {% else %}
+      <meta content="{{website_data.page_description}}" name="description" />
+    {% endif %}
+
+    <meta content="{{website_data.page_keywords}}" name="keywords"/>
+    <meta content="en_UK" property="og:locale"/>
+    <meta content="website" property="og:type"/>
+    <meta content="{{website_data.page_title}}" property="og:title"/>
+    <meta content="{{website_data.page_description}}" property="og:description"/>
+    <meta content="{{website_data.page_title}}" property="og:site_name"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,600,700,500" type="text/css" />
+    <link rel="stylesheet" href="{{ '/css/template_3.css' | file_url}}" type="text/css" />
+
+    {% if website_data.brand_color.present? %}
+      <css>
+        .header,
+        .content_box.red {
+          background-color: {{website_data.brand_color}};
+        }
+        .btn,
+        .btn:hover,
+        .btn:focus{
+          background: {{website_data.brand_color}};
+          background: -moz-linear-gradient(top, {{website_data.brand_color}} 0%, {{website_data.brand_color}} 100%);
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, {{website_data.brand_color}}), color-stop(100%, {{website_data.brand_color}}));
+          background: -webkit-linear-gradient(top, {{website_data.brand_color}} 0%, {{website_data.brand_color}} 100%);
+          background: -o-linear-gradient(top, {{website_data.brand_color}} 0%, {{website_data.brand_color}} 100%);
+          background: -ms-linear-gradient(top, {{website_data.brand_color}} 0%, {{website_data.brand_color}} 100%);
+          background: linear-gradient(to bottom, {{website_data.brand_color}} 0%, {{website_data.brand_color}} 100%);
+        }
+        .pager li a{
+          color: {{website_data.brand_color}};
+          border-color: {{website_data.brand_color}};
+        }
+        .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item > a:hover{
+          background: {{website_data.brand_color}};
+        }
+        .flexslider.testi-home .flex-direction-nav li .flex-prev, .flexslider.testi-home .flex-direction-nav li .flex-next {
+          color: {{website_data.brand_color}};
+        }
+        .flexslider.testi-home .flex-direction-nav li .flex-prev:hover, .flexslider.testi-home .flex-direction-nav li .flex-next:hover,
+        .flexslider.testi-home .flex-direction-nav li .flex-prev:focus, .flexslider.testi-home .flex-direction-nav li .flex-next:focus {
+          background-color: {{website_data.brand_color}};
+          border-color: {{website_data.brand_color}};
+          color: #fff;
+        }
+        .flexslider.testi-home .flex-viewport ul.slides li .post_options a{
+          color: {{website_data.brand_color}}
+        }
+        .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item > a:hover, .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item > a:active, .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item > a:focus ,
+        .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item.current-menu-item > a, .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item.sfHover > a,
+        .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item .sub-menu .menu-item > a:hover, .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item .sub-menu .menu-item > a:active, .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item .sub-menu .menu-item > a:focus,
+        .nav__primary .sf-menu > .menu-item > .sub-menu > .menu-item .sub-menu .menu-item.current-menu-item > a {
+          background-color: {{website_data.brand_color}} !important;
+        }
+      </css>
+    {% endif %}
+    <body data-hotel="{{website_data.hotel_id}}" class="home page page-id-203 page-template page-template-page-home page-template-page-home-php">
+
+      <!-- Mobile navigation  -->
+      <nav class="other" id="menu">
+        <div class="navbar" id="mobile-menu">
+          <ul class="nav navbar-nav navbar-right">
+            {% for link in website_data.top_links %}
+              {% if link.links.size == 0 %}
+                {% if link.category == 'Predefined Link' %}
+                  {% if link.value == 'home' %}
+                    <li>
+                      <a href="/">{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'rooms' %}
+                    <li class="dropdown">
+                      <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        {{link.title}}
+                        <i class="fa fa-caret-right"></i>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        {% for room in website_data.rooms %}
+                          {% if room.visible == true %}
+                            <li>
+                              <a href="{{room.slug}}">{{room.name}}></a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                        {% for room in website_data.custom_rooms %}
+                          {% if room.visible == true %}
+                            <li>
+                              <a href="{{room.slug}}">{{room.name}}></a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% elsif link.value == 'features' %}
+                    <li>
+                      <a href="#features">{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'contacts' %}
+                    <li>
+                      <a href="/contacts">{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'faq' %}
+                    <li>
+                      <a href="/faq">{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'about' %}
+                    <li>
+                      <a href="/about">{{link.value}}</a>
+                    </li>
+                  {% elsif link.value == 'blog' %}
+                    <li>
+                      <a href="/blog">{{link.value}}>{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'terms-and-conditions' %}
+                    <li>
+                      <a href="/terms-and-conditions"> {{link.title}} </a>
+                    </li>
+                  {% elsif link.value == 'privacy-policy' %}
+                    <li>
+                      <a href="/privacy-policy">{{link.title}}</a>
+                    </li>
+                  {% elsif link.value == 'booking' %}
+                    <li>
+                      {% if website_data.booking_link.nil? or website_data.booking_link.empty? %}
+                        <a href="/public_booking" class="booking-form-link">
+                          {{link.title}}
+                        </a>
+                      {% else %}
+                        <a href="{{website_data.booking_link}}">
+                          {{link.title}}
+                        </a>
+                      {% endif %}
+                    </li>
+                  {% endif %}
+                {% elsif link.category == 'Custom Page Link' %}
+                  <li>
+                    <a href="{{link.value}}">{{link.title}}</a>
+                  </li>
+                {% elsif link.category == 'Blog Record Link' %}
+                  <li>
+                    <a href="/blog/{{link.value}}">{{link.title}}</a>
+                  </li>
+                {% elsif link.category == 'Room Page Link' %}
+                  <li>
+                    <a href="{{link.value}}">{{link.title}}></a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="{{link.value}}">{{link.value}}</a>
+                  </li>
+                {% endif %}
+              {% else %}
+                <li class="dropdown">
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                    {{link.title}}
+                    <i class="fa fa-caret-right"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% for link in link.links %}
+                      {% if link.category == 'Predefined Link' %}
+                        {% if link.value == 'home' %}
+                          <li>
+                            <a href="/">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'rooms' %}
+                          <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                              {{link.title}}
+                              <i class="fa fa-caret-right"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="meun">
+                              {% for room in website_data.rooms %}
+                                {% if room.visible == true %}
+                                  <li>
+                                    <a href="{{room.slug}}">{{room.title}}</a>
+                                  </li>
+                                {% endif %}
+                              {% endfor %}
+                              {% for room in website_data.custom_rooms %}
+                                {% if room.visible == true %}
+                                  <li>
+                                    <a href="{{room.slug}}">{{room.title}}</a>
+                                  </li>
+                                {% endif %}
+                              {% endfor %}
+                            </ul>
+                          </li>
+                        {% elsif link.value == 'features' %}
+                          <li>
+                            <a href="#fetaures">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'contacts' %}
+                          <li>
+                            <a href="/contacts">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'faq' %}
+                          <li>
+                            <a href="/faq">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'about' %}
+                          <li>
+                            <a href="/about">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'blog' %}
+                          <li>
+                            <a href="/blog">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'terms_and_conditions' %}
+                          <li>
+                            <a href="/terms_and_conditions">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'privacy_policy' %}
+                          <li>
+                            <a href="/privacy-policy">{{link.title}}</a>
+                          </li>
+                        {% elsif link.value == 'booking' %}
+                          <li>
+                            {% if website_data.booking_link.nil? or website_data.booking_link.empty? %}
+                              <li>
+                                <a href="/public_boking" class="booking-form-link">{{link.title}}</a>
+                              </li>
+                            {% else %}
+                              <li>
+                                <a href="{{website_data.booking_link}}">{{link.title}}</a>
+                              </li>
+                            {% endif %}
+                          </li>
+                        {% endif %}
+                      {% elsif link.category == 'Custom Room Page' %}
+                        <li>
+                          <a href="{{link.value}}">{{link.title}}</a>
+                        </li>}
+                      {% elsif link.category == 'Blog Record Link' %}
+                        <li>
+                          <a href="/blog/{{link.value}}">{{link.title}}</a>
+                        </li>
+                      {% elsif link.category == 'Room Page Link' %}
+                        <li>
+                          <a href="{{link.value}}">{{link.title}}</a>
+                        </li>
+                      {% else %}
+                        <li>
+                          <a href="{{link.value}}">{{link.title}}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+            {% endfor %}
+            <li class="logout">
+              <a href="#">
+                Logout
+              </a>
+            </li>
+            {% if website_data.langs.size > 1 %}
+              <li class="lang">
+                <a href="#">
+                  <span class="flag-icon flag-icon-<%= @lang %>"></span>
+                 <!-- <%= get_native_title(@lang) %> -->
+                  <i class="fa fa-caret-right"></i>
+               </a>
+               <ul class="sub-menu">
+                 {% for lang in website_data.langs %}
+                   <li class="menu-item menu-item-type-post_type menu-item-object-page">
+                     <a href="/{{lang}}">
+                       <span class="flag-icon flag-icon-{{lang}}"></span>
+                       <!-- <%= get_native_title(lang) %> -->
+                     </a>
+                   </li>
+                 {% endfor %}
+               </ul>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      <main id="panel">
+        {%  website_data.mobile_menu_fixed == true %}
+          <div class="navbar-fixed-top row xs-header visible-xs-block hidden-sm hidden-md hidden-lg mobile-nav">
+        {% else %}
+          <div class="row xs-header visible-xs-block hidden-sm hidden-md hidden-lg mobile-nav">
+        {% endif %}
+          <div class="row-fluid">
+            <div class="span4 text-center small-top-btn">
+              <button class="open-menu">
+                <i class="fa fa-bars"></i>
+                Menu
+              </button>
+            </div>
+            <div class="span4 text-center small-top-btn">
+              <a href="tel:{{website_data.phone_number}}">
+                <i class="fa fa-phone"></i>
+                Call
+              </a>
+            </div>
+            <div class="span4 text-center small-top-btn">
+              <a href="#map">
+                <i class="fa fa-map-marker"></i>
+                Map
+              </a>
+            </div>
+            <div class="span4 text-center reservation">
+              {% if website_data.booking_link.nil? or website_data.booking_link.empty? %}
+                <a href="/public_booking" class="reservation booking-form-link" style="background-color: {{website_data.booking_button_color}}">
+                  <i class="fa fa-calendar"></i>
+                  Reservation
+                </a>
+              {% else %}
+                <a href="{{website_data.booking_link}}" class="reservation" style="background-color: {{website_data.booking_button_color}}">
+                  <i class="fa fa-calendar"></i>
+                  Reservation
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {{content}}
+
+      <!--  Booking form -->
+
+      {% if website_data.booking_link.nil? or website_data.booking_link.empty? %}
+        <div class="booking-form hidden"  style="background-image: url({{website_data.header_image | attachment_url: 'blured' }});">
+          <div class="background"></div>
+          <div class="booking-close">
+            Close
+          </div>
+          <div class="form">
+           <h2>
+             Book Direct, Best Rate Guaranteed
+             <br/>
+             <small>
+               Trouble finding what your looking for? Call us on
+               {{website_data.phone_number}}
+             </small>
+           </h2>
+           <form action="/book">
+             <div>
+               <div class="field">
+                 <label>Check in</label>
+                 <input class="date" value="{{ 'now' | date: "%d %b %Y" }}"></input>
+                 <input name="dateFrom" type="hidden" value="{{ 'now' | date: "%Y-%m-%d" }}"></input>
+               </div>
+               <div class="field select">
+                 <label>Nights</label>
+                 <select name="nights">
+                   {% for x in (1..20) %}
+                     <option value="{{x}}">
+                       {{x}}
+                     </option>
+                   {% endfor %}
+                 </select>
+               </div>
+             </div>
+             <div>
+               <div class="field-control">
+                 <button class="submit booking-submit">Check Availability</button>
+               </div>
+               <div class="error"></div>
+             </div>
+           </form>
+         </div>
+        </div>
+      {% endif %}
+
+    </body>
+    <script type="text/javascript" src="{{ '/js/template_3.js' | file_url }}"> </script>
+  </head>
+</html>
