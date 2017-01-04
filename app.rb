@@ -19,7 +19,7 @@ class Website < Sinatra::Base
 
   set :root, File.dirname(__FILE__)
   set :views, File.dirname(__FILE__) + '/views'
-  set :public_folder, File.dirname(__FILE__) + "/views/assets"
+  set :public_folder, File.dirname(__FILE__) + "/views"
   set :static, true
 
   configure :development do
@@ -129,6 +129,7 @@ class Website < Sinatra::Base
   private
 
   def is_number?(string)
+    true
   end
 
 end
